@@ -78,18 +78,15 @@ public class IconManiacsHardwareBot {
         // Save reference to Hardware map
         hwMap = ahwMap;
 
-        // Define and Initialize Motors\
-
-        // Set all motors to zero power
-        frontLeft.setPower(0);
-        backLeft.setPower(0);
-        frontRight.setPower(0);
-        backRight.setPower(0);
-        intake.setPower(0);
-        duckMotor.setPower(0);
-        armLeft.setPower(0);
-        armRight.setPower(0);
-
+        // Define and Initialize Motors
+        frontLeft = hwMap.get(DcMotor.class, "frontLeft");
+        frontRight = hwMap.get(DcMotor.class, "frontRight");
+        backLeft = hwMap.get(DcMotor.class, "backLeft");
+        backRight = hwMap.get(DcMotor.class, "backRight");
+        armRight = hwMap.get(DcMotor.class, "armRight");
+        armLeft = hwMap.get(DcMotor.class, "armLeft");
+        intake = hwMap.get(DcMotor.class, "intake");
+        duckMotor = hwMap.get(DcMotor.class, "duckMotor");
 
         // sets zeroPowerBehavior
         frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -101,18 +98,9 @@ public class IconManiacsHardwareBot {
         armLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         armRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        // Sets motor directions
-        frontLeft = hwMap.get(DcMotor.class, "frontLeft");
-        frontRight = hwMap.get(DcMotor.class, "frontRight");
-        backLeft = hwMap.get(DcMotor.class, "backLeft");
-        backRight = hwMap.get(DcMotor.class, "backRight");
-        armRight = hwMap.get(DcMotor.class, "armRight");
-        armLeft = hwMap.get(DcMotor.class, "armLeft");
-        intake = hwMap.get(DcMotor.class, "intake");
-        duckMotor = hwMap.get(DcMotor.class, "duckMotor");
-
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
+        // changes the direction of the motor's movement respective to its orientation
         frontLeft.setDirection(DcMotor.Direction.FORWARD);
         frontRight.setDirection(DcMotor.Direction.REVERSE);
         backLeft.setDirection(DcMotor.Direction.FORWARD);
@@ -122,7 +110,7 @@ public class IconManiacsHardwareBot {
         intake.setDirection(DcMotor.Direction.REVERSE);
         duckMotor.setDirection(DcMotor.Direction.REVERSE);
 
-
+        //Sets mode to run using the encoders
         frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -131,6 +119,16 @@ public class IconManiacsHardwareBot {
         armRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         intake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         duckMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        // Set all motors to zero power
+        frontLeft.setPower(0);
+        backLeft.setPower(0);
+        frontRight.setPower(0);
+        backRight.setPower(0);
+        intake.setPower(0);
+        duckMotor.setPower(0);
+        armLeft.setPower(0);
+        armRight.setPower(0);
 
     }
 

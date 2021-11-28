@@ -33,6 +33,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 //import com.qualcomm.robotcore.util.Range;
 
@@ -110,9 +111,9 @@ public class IconManiacsTeleOp extends OpMode {
         bot.frontLeft.setPower(drive + strafe + rotate);
 
         if (gamepad2.right_trigger == 1) {
-            bot.intake.setPower(1);
+            bot.intake.setPower(0.5);
         } else if (gamepad2.left_trigger == 1) {
-            bot.intake.setPower(-1);
+            bot.intake.setPower(-0.5);
         } else {
             bot.intake.setPower(0);
         }
@@ -125,12 +126,16 @@ public class IconManiacsTeleOp extends OpMode {
          */
 
         double direction = -gamepad2.right_stick_y;
-        bot.armLeft.setPower(direction);
-        bot.armRight.setPower(direction);
+        bot.armLeft.setPower(direction * 2);
+        bot.armRight.setPower(direction * 2);
 
        if(gamepad2.a){
-           bot.duckMotor.setPower(1);
-       } else if (gamepad2.b) {
+           bot.duckMotor.setPower(0.9);
+       } else if (gamepad2.y) {
+           bot.duckMotor.setDirection(DcMotor.Direction.FORWARD);
+           bot.duckMotor.setPower(0.9);
+       }
+       else if (gamepad2.b) {
            bot.duckMotor.setPower(0);
         }
 
@@ -140,7 +145,7 @@ public class IconManiacsTeleOp extends OpMode {
     }
 
 
-    public void runOpMode() throws InterruptedException{
+    public void runOpMode(){
 
         /*
             CHAWKS: On Driver Station, telemetry will be display!
